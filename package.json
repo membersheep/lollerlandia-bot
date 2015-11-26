@@ -1,7 +1,19 @@
 {
-  "name": "telegram-bot-sample",
-  "version": "0.0.1",
-  "dependencies": {
-    "unirest": "^0.4.2"
-  }
+  "name": "lollerlandia-bot",
+  "version": "1.0.0",
+  "description": "telegram bot to do some funny stuff",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \\\"Error: no test specified\\\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/membersheep/lollerlandia-bot.git"
+  },
+  "author": "Alessandro Maroso",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/membersheep/lollerlandia-bot/issues"
+  },
+  "homepage": "https://github.com/membersheep/lollerlandia-bot#readme"
 }
