@@ -4,19 +4,19 @@
   "description": "telegram bot to do some funny stuff",
   "main": "index.js",
   "scripts": {
-    "test": "echo \\\"Error: no test specified\\\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/membersheep/lollerlandia-bot.git"
   },
-  "author": "Alessandro Maroso",
+  "author": "membersheep",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/membersheep/lollerlandia-bot/issues"
   },
   "homepage": "https://github.com/membersheep/lollerlandia-bot#readme",
   "dependencies": {
-    "node-telegram-bot-api": "^0.17.0"
+    "express": "^4.13.3"
   }
 }
