@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/membersheep/lollerlandia-bot/issues"
   },
-  "homepage": "https://github.com/membersheep/lollerlandia-bot#readme"
+  "homepage": "https://github.com/membersheep/lollerlandia-bot#readme",
+  "dependencies": {
+    "node-telegram-bot-api": "^0.17.0"
+  }
 }
