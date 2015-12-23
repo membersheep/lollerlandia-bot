@@ -1,9 +1,8 @@
 var statusRoute = {
-  '/status': {
-    method: 'get',
-    fn: function(req, res) {
-      res.json({ status: 'UP' });
-    }
+  path: '/status',
+  method: 'get',
+  fn: function(req, res) {
+    res.json({ status: 'UP' });
   }
 };
 

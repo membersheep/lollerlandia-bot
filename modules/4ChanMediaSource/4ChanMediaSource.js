@@ -1,4 +1,4 @@
-var chanAPI = require('4chanAPIInterface');
+var chanAPI = require('./4ChanAPIInterface');
 
 var chanSource = {};
 
