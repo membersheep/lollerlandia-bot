@@ -9,6 +9,7 @@ var requestOptions = {
 		'if-modified-since': (new Date()).toUTCString()
 	}
 };
+
 var chanInterface = {};
 
 chanInterface.downloadJSONForBoard = function(board, successCallback, errorCallback) {
