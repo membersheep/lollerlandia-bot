@@ -14,6 +14,7 @@ telegramAPI.setupWebhook = function(token, url, callback){
     if (err) {
       return callback(err);
     } else if (res.statusCode == 200) {
+      console.log(res.body);
       return callback(null);
     } else {
       return callback(new Error("Unable to setup webhook. Code " + res.statusCode));

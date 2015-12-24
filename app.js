@@ -1,3 +1,6 @@
+var BOT_TOKEN = "158621575:AAEUlrWtGVzdNlAO7FT238J507ogOZJvfKc";
+var SERVER_PORT = "443";
+
 var express = require('express');
 var bodyParser = require('body-parser');
 
@@ -10,9 +13,8 @@ var ChanAPI = require('./modules/4ChanService/4ChanAPI');
 var ChanService = require('./modules/4ChanService/4ChanService');
 var chanService = ChanService.create(ChanAPI);
 var Bot = require('./modules/Bot');
-var BOT_TOKEN = "158621575:AAEUlrWtGVzdNlAO7FT238J507ogOZJvfKc";
 var bot = Bot.create(chanService, TelegramAPI);
-bot.setup(BOT_TOKEN, 'http://host:1337/telegramBot', function(err) {
+bot.setup(BOT_TOKEN, 'https://lollerlandia-bot.herokuapp.com/telegramBot', function(err) {
   if (err) {
     return console.log(err);
   }
@@ -28,7 +30,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.get('/status', statusRoute.fn);
 app.get('/telegramBot', telegramRoute.fn);
 
-var server = app.listen(3000, function () {
+var server = app.listen(SERVER_PORT, function () {
   var host = server.address().address;
   var port = server.address().port;
 
