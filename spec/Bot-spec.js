@@ -28,5 +28,9 @@ describe('Bot', function(){
       expect(success).toBe(true);
     });
   });
-
+  describe('#readMessage', function(){
+    it('reads a message', function(){
+      
+    });
+  });
 });

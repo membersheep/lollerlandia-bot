@@ -1,12 +1,12 @@
-var statusRoute = require('../routes/status');
+var StatusRoute = require('../routes/status');
 var TelegramRoute = require('../routes/telegramRoute');
 var testTelegramRequestJSON = require('./data/telegramRequest.json');
 
 describe('Routes', function(){
   describe('/status', function(){
     it('sets status:UP in the response object', function(){
-      var emptyReq = {};
-      statusRoute.fn(emptyReq, {
+      var statusRoute = StatusRoute.create();
+      statusRoute.fn({}, {
         json: function(data) {
           expect(data).toEqual({ status: 'UP' });
         }
@@ -20,7 +20,7 @@ describe('Routes', function(){
         messages.push(message);
       }
     };
-    var telegramRoute = TelegramRoute.create('https://fakeurl:1337', bot);
+    var telegramRoute = TelegramRoute.create(bot);
 
     it('forwards every message to the bot', function(){
       // var request = {body};

@@ -1,9 +1,14 @@
-var statusRoute = {
-  path: '/status',
-  method: 'get',
-  fn: function(req, res) {
-    res.json({ status: 'UP' });
-  }
+function StatusRoute(){
+
+}
+
+StatusRoute.prototype.fn = function(req, res) {
+  console.log(req.body);
+  res.json({ status: 'UP' });
 };
 
-module.exports = statusRoute;
+function create (){
+  return new StatusRoute();
+}
+
+module.exports.create = create;
