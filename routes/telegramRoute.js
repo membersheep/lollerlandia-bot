@@ -4,11 +4,10 @@ function TelegramRoute(telegramBot){
 
 TelegramRoute.prototype.fn = function(req, res) {
   var result = req.body;
+  console.log(req.body);
   for (var update in result) {
     if (result.hasOwnProperty(update)) {
-      console.log(this.bot);
-      console.log(update.message);
-      this.bot.readMessage(update.message);
+      // this.bot.readMessage(update.message);
     }
   }
 };
