@@ -1,5 +1,5 @@
 var BOT_TOKEN = "158621575:AAEUlrWtGVzdNlAO7FT238J507ogOZJvfKc";
-var SERVER_PORT = "443";
+var SERVER_PORT = process.env.PORT || 3000;
 
 var express = require('express');
 var bodyParser = require('body-parser');
