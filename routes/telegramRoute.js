@@ -7,6 +7,7 @@ TelegramRoute.prototype.fn = function(req, res) {
   var result = req.body;
   for (var update in result) {
     if (result.hasOwnProperty(update)) {
+      console.log(this.bot);
       this.bot.readMessage(update.message);
     }
   }
