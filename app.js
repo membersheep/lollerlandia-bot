@@ -14,7 +14,7 @@ var ChanService = require('./modules/4ChanService/4ChanService');
 var chanService = ChanService.create(ChanAPI);
 var Bot = require('./modules/Bot');
 var bot = Bot.create(chanService, TelegramAPI);
-bot.setup(BOT_TOKEN, 'https://lollerlandia-bot.herokuapp.com/telegramBot', function(err) {
+bot.setup(BOT_TOKEN, 'https://arcane-lowlands-8408.herokuapp.com/telegramBot', function(err) {
   if (err) {
     return console.log(err);
   }
