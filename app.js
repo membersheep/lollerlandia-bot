@@ -28,7 +28,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 app.get('/status', statusRoute.fn);
-app.get('/telegramBot', telegramRoute.fn);
+app.post('/telegramBot', telegramRoute.fn);
 
 var server = app.listen(SERVER_PORT, function () {
   var host = server.address().address;
