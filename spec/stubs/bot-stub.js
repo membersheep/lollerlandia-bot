@@ -1,12 +1,8 @@
-var messages = [];
+var message = '';
 
-var botStub = {
-  readMessage: function(message) {
-    messages.push(message);
-  },
-  messages: function() {
-    return messages;
-  }
+exports.readMessage =  function(msg) {
+  message = msg;
 };
-
-module.exports = botStub;
+exports.messages = function() {
+  return message;
+};
