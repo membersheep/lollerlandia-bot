@@ -1,4 +1,4 @@
-var bot = require('../modules/bot.js');
+var bot = require('../modules/Bot.js');
 
 module.exports = function(req, res) {
   var result = req.body;
