@@ -22,6 +22,13 @@ telegramAPI.setupWebhook = function(token, url, callback){
   });
 };
 
+telegramAPI.setupWebhook('158621575:AAEUlrWtGVzdNlAO7FT238J507ogOZJvfKc', 'https://aqueous-lowlands-1093.herokuapp.com/telegramBot', function(err) {
+  if (err) {
+    return console.log(err);
+  }
+  return console.log('Bot successfully set up.');
+});
+
 telegramAPI.postImage = function(token, imageLocalPath, chatId){
   var requestUrl = TELEGRAM_BASE_URL + token + POST_IMAGE;
   var formData = {
