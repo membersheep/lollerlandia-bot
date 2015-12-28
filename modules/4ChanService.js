@@ -1,13 +1,13 @@
-function ChanService(chanAPI) {
-  this.chanAPI = chanAPI;
-}
+var chanAPI = require('./4ChanAPI');
 
-ChanService.prototype.getRandomImage = function(board, callback) {
+var chanService = {};
+
+chanService.getRandomImage = function(board, callback) {
   chanAPI.downloadJSONForBoard(board, function(err, body){
     if (err) {
       return callback(err);
     } else if (res.statusCode == 200) {
-      var randomImageName = extractRandomImageURL(body);
+      var randomImageName = extractRandomImageNames(body);
       chanAPI.downloadMedia(randomImageName, __dirname, function(path){
   			console.log(randomImageName + 'downloaded at' + path);
   			return callback(null, path);
@@ -25,11 +25,4 @@ function extractRandomImageName(body) {
   return imageFileName + "." + imageFileExtension;
 }
 
-function create(chanAPI) {
-  if (chanAPI === undefined) {
-    throw new Error("Dependencies should be injected.");
-  }
-  return new ChanService(chanAPI);
-}
-
-module.exports.create = create;
+module.exports = chanService;

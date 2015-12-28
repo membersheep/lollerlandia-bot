@@ -4,31 +4,17 @@ var SERVER_PORT = process.env.PORT || 3000;
 var express = require('express');
 var bodyParser = require('body-parser');
 
-var StatusRoute = require('./routes/status');
-var statusRoute = StatusRoute.create();
+var statusHandler = require('./routes/status');
 
-var TelegramRoute = require('./routes/telegramRoute');
-var TelegramAPI = require('./modules/TelegramAPI');
-var ChanAPI = require('./modules/4ChanService/4ChanAPI');
-var ChanService = require('./modules/4ChanService/4ChanService');
-var chanService = ChanService.create(ChanAPI);
-var Bot = require('./modules/Bot');
-var bot = Bot.create(chanService, TelegramAPI);
-bot.setup(BOT_TOKEN, 'https://aqueous-lowlands-1093.herokuapp.com/telegramBot', function(err) {
-  if (err) {
-    return console.log(err);
-  }
-  return console.log('Bot successfully set up.');
-});
-var telegramRoute = TelegramRoute.create(bot);
+var telegramRoute = require('./routes/telegram');
 
 var app = express();
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-app.get('/status', statusRoute.fn);
-app.post('/telegramBot', telegramRoute.fn);
+app.get('/status', statusHandler);
+app.post('/telegramBot', telegramRoute);
 
 var server = app.listen(SERVER_PORT, function () {
   var host = server.address().address;

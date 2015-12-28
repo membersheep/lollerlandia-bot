@@ -1,14 +1,4 @@
-function StatusRoute(){
-
-}
-
-StatusRoute.prototype.fn = function(req, res) {
+module.exports = function status(req, res, next) {
   console.log(req.body);
   res.json({ status: 'UP' });
 };
-
-function create (){
-  return new StatusRoute();
-}
-
-module.exports.create = create;
