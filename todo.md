@@ -1,5 +1,4 @@
 #LollerlandiaBot
-- TelegramAPI tests
 - 4chan service tests
 - 4chanAPi tests
 - Move all configurations to a config.js file

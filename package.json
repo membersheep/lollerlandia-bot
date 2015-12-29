@@ -4,7 +4,7 @@
   "description": "telegram bot to do some funny stuff",
   "main": "index.js",
   "scripts": {
-    "test": "jasmine",
+    "test": "jasmine-node spec/",
     "start": "node index.js"
   },
   "repository": {
