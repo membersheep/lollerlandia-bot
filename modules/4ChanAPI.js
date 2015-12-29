@@ -25,19 +25,22 @@ chanInterface.downloadJSONForBoard = function(board, callback) {
   });
 };
 
-chanInterface.downloadMedia = function(name, localPath, callback) {
+chanInterface.downloadMedia = function(name, board, localPath, callback) {
   var requestUrl = CHAN_IMAGE_BASE_URL + board + "/" + name;
-  var targetPath = localPath + "/" + filename;
+  var targetPath = localPath + "/" + name;
 
   request.head(requestUrl, function(err, res, body){
-    // console.log('content-type:', res.headers['content-type']);
-    // console.log('content-length:', res.headers['content-length']);
     if(err) {
       return callback(err);
     } else {
-      request(requestUrl).pipe(fs.createWriteStream(targetPath)).on('close', callback(null, targetPath));
+      var r = request(requestUrl).pipe(fs.createWriteStream(targetPath));
+			r.on('close', callback);
     }
   });
 };
 
-module.export = chanInterface;
+chanInterface.downloadMedia('1405099255590.png', '/mu', __dirname + '/../images', function(err, body) {
+	console.log('downloaded');
+});
+
+module.exports = chanInterface;

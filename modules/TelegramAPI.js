@@ -10,7 +10,7 @@ var telegramAPI = {};
 
 telegramAPI.setupWebhook = function(token, url, callback){
   var requestUrl = TELEGRAM_BASE_URL + token + SETUP_WEBHOOK.replace(":url", url);
-  request(requestUrl, function (err, res, body) {
+  request(requestUrl, {}, function (err, res, body) {
     if (err) {
       return callback(err);
     } else if (res.statusCode == 200) {

@@ -3,16 +3,16 @@ var proxyquire = require('proxyquire');
 var requestStub = require('./stubs/request-stub');
 var chanAPI = proxyquire('../modules/4chanAPI', {'request': requestStub});
 
-// describe('Telegram API', function(){
-//   it('sets up webhook', function(){
-//     telegramAPI.setupWebhook('token', 'url', function(err){
-//       expect(err).toBe(null);
-//     });
-//   });
-//   it('sends a sendPhoto request to telegram', function(){
-//     telegramAPI.postImage('token', __dirname + '/data/test.gif', 1, function(err){
-//       expect(err).toBe(null);
-//     });
-//     // TODO: Add tests for request conformity
-//   });
-// });
+describe('4Chan API', function(){
+  describe('downloadJSONForBoard', function() {
+    describe('given a board name', function() {
+      it('downloads a json for an example board', function(done){
+        chanAPI.downloadJSONForBoard('/b', function(err, body){
+          expect(err).toBe(null);
+          expect(body).not.toBe(null);
+          done();
+        });
+      });
+    });
+  });
+});

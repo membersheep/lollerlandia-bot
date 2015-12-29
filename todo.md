@@ -1,7 +1,11 @@
 #LollerlandiaBot
-- 4chan service tests
-- 4chanAPi tests
-- Move all configurations to a config.js file
+- 4chan service tests.
+- Deploy on heroku and test with telegram.
+- Refactoring:
+  - Move all configuration strings to a config.js file.
+- Features:
+  - Add support for every board.
+  - Add support for animated gifs and webms.
 
 Refactor every module so that:
  - Modules should expose an error-first callback interface.
