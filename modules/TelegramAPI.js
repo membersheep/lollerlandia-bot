@@ -14,7 +14,6 @@ telegramAPI.setupWebhook = function(token, url, callback){
     if (err) {
       return callback(err);
     } else if (res.statusCode == 200) {
-      console.log(res.body);
       return callback(null);
     } else {
       return callback(new Error("Unable to setup webhook. Code " + res.statusCode));
@@ -22,24 +21,25 @@ telegramAPI.setupWebhook = function(token, url, callback){
   });
 };
 
-telegramAPI.setupWebhook('158621575:AAEUlrWtGVzdNlAO7FT238J507ogOZJvfKc', 'https://aqueous-lowlands-1093.herokuapp.com/telegramBot', function(err) {
-  if (err) {
-    return console.log(err);
-  }
-  return console.log('Bot successfully set up.');
-});
-
-telegramAPI.postImage = function(token, imageLocalPath, chatId){
-  var requestUrl = TELEGRAM_BASE_URL + token + POST_IMAGE;
-  var formData = {
-    chat_id: chatId,
-    photo: fs.createReadStream(imageLocalPath)
-  };
-  request.post({url:requestUrl, formData: formData}, function(err, httpResponse, body) {
+telegramAPI.postImage = function(token, imagePath, chatId, callback) {
+  fs.access(imagePath, function(err) {
     if (err) {
-      console.error('Photo upload failed:', err);
+      callback(err);
     } else {
-      console.log('Photo upload successful!  Server responded with:', body);
+      var requestUrl = TELEGRAM_BASE_URL + token + POST_IMAGE;
+      var formData = {
+        chat_id: chatId,
+        photo: fs.createReadStream(imagePath)
+      };
+      request.post({url:requestUrl, formData: formData}, function(err, res, body) {
+        if (err) {
+          return callback(err);
+        } else if (res.statusCode == 200) {
+          return callback(null, res, body);
+        } else {
+          return callback(new Error("Unable to post image. Code " + res.statusCode));
+        }
+      });
     }
   });
 };
