@@ -33,14 +33,11 @@ chanInterface.downloadMedia = function(name, board, localPath, callback) {
     if(err) {
       return callback(err);
     } else {
-      var r = request(requestUrl).pipe(fs.createWriteStream(targetPath));
-			r.on('close', callback);
+      var r = request(requestUrl).pipe(fs.createWriteStream(targetPath)).on('close', function(){
+				callback(null, targetPath);
+			});
     }
   });
 };
-
-chanInterface.downloadMedia('1405099255590.png', '/mu', __dirname + '/../images', function(err, body) {
-	console.log('downloaded');
-});
 
 module.exports = chanInterface;
