@@ -7,24 +7,7 @@ var bot = proxyquire('../modules/Bot', {
   './TelegramAPI': telegramStub
 });
 
-var telegramMessage = {
-   message_id:30,
-   from:{
-      id:14174896,
-      first_name:'Alessandro',
-      last_name:'Maroso',
-      username:'membersheep'
-   },
-   chat:{
-      id:14174896,
-      first_name:'Alessandro',
-      last_name:'Maroso',
-      username:'membersheep',
-      type:'private'
-   },
-   date:1451317037,
-   text:'/b'
-};
+var telegramMessage = require('./data/telegramRequest').message;
 
 describe('Bot: when it reads a message', function(){
   describe('that is a board name', function(){

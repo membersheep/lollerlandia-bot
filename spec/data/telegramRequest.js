@@ -15,7 +15,7 @@ module.exports = {
       username: 'membersheep',
       type: 'private'
     },
-    date: 1451468563,
+    date: Date.now(),
     text: '/b'
   }
 };
