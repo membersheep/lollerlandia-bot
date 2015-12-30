@@ -7,18 +7,56 @@ chanService.getRandomImage = function(board, callback) {
     if (err) {
       return callback(err);
     } else {
-      var randomImageName = extractRandomImageName(body);
-      chanAPI.downloadMedia(randomImageName, board, __dirname + "/../images", function(err, path){
-  			return callback(null, path);
-  		});
+      var randomFileName = extractRandomFileName(body);
+      if (randomFileName === undefined) {
+        return callback(new Error("Impossible to extract a file name from JSON."));
+      }
+      chanAPI.downloadMedia(randomFileName, board, __dirname + "/../images", function(err, path){
+        if (err) {
+          return callback(err);
+        } else {
+          return callback(null, path);
+        }
+    	});
     }
 	});
 };
 
-function extractRandomImageName(body) {
-  var imageFileName = body.threads[1].posts[0].tim;
-  var imageFileExtension = body.threads[1].posts[0].ext;
-  return imageFileName + imageFileExtension;
+function extractRandomFileName(body) {
+  if (!body.hasOwnProperty('threads')) {
+    return undefined;
+  }
+  if (Object.prototype.toString.call(body.threads) !== '[object Array]') {
+    return undefined;
+  }
+
+  var validThreads = body.threads.filter(isValidThread);
+
+  if (validThreads.length === 0) {
+    return undefined;
+  }
+
+  var randomThread = validThreads[Math.floor(Math.random() * validThreads.length)];
+  var validPosts = randomThread.posts.filter(isValidPost);
+  var randomPost = validPosts[Math.floor(Math.random()*validPosts.length)];
+  var fileName = randomPost.tim;
+  var fileExtension = randomPost.ext;
+  return fileName + fileExtension;
+}
+
+function isValidThread(element, index, array) {
+  if (element.hasOwnProperty('posts')) {
+    if (Object.prototype.toString.call( element.posts ) === '[object Array]') {
+      if (element.posts[0].hasOwnProperty('tim') && element.posts[0].hasOwnProperty('ext')) {
+        return true;
+      }
+    }
+  }
+  return false;
+}
+
+function isValidPost(element, index, array) {
+  return element.hasOwnProperty('tim') && element.hasOwnProperty('ext');
 }
 
 module.exports = chanService;
