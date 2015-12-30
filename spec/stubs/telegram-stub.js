@@ -1,7 +1,7 @@
 var localPath = '';
 var chatId = '';
 
-exports.postImage =  function(imageLocalPath, cId) {
+exports.postImage =  function(token, imageLocalPath, cId) {
   localPath = imageLocalPath;
   chatId = cId;
 };
