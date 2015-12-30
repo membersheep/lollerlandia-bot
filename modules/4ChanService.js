@@ -8,8 +8,8 @@ chanService.getRandomImage = function(board, callback) {
       return callback(err);
     } else {
       var randomImageName = extractRandomImageName(body);
-      chanAPI.downloadMedia(randomImageName, board, __dirname + "../images", function(err, path){
-  			console.log(randomImageName + 'downloaded at' + path);
+      console.log(randomImageName);
+      chanAPI.downloadMedia(randomImageName, board, __dirname + "/../images", function(err, path){
   			return callback(null, path);
   		});
     }
@@ -17,10 +17,9 @@ chanService.getRandomImage = function(board, callback) {
 };
 
 function extractRandomImageName(body) {
-  var imageFileName = body.threads[0].posts[0].tim;
-  var imageFileExtension = body.threads[0].posts[0].ext;
-
-  return imageFileName + "." + imageFileExtension;
+  var imageFileName = body.threads[1].posts[0].tim;
+  var imageFileExtension = body.threads[1].posts[0].ext;
+  return imageFileName + imageFileExtension;
 }
 
 module.exports = chanService;
