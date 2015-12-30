@@ -9,7 +9,13 @@ var bot = {
           if (err) {
             return console.log(err);
           } else {
-            telegramService.postImage(token, localPath, message.chat.id);
+            telegramService.postImage(token, localPath, message.chat.id, function(err, res, body) {
+              if (err) {
+                return console.log(err);
+              } else {
+                return console.log(body);
+              }
+            });
           }
         });
       }

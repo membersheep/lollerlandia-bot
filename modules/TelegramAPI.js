@@ -22,6 +22,7 @@ telegramAPI.setupWebhook = function(token, url, callback){
 };
 
 telegramAPI.postImage = function(token, imagePath, chatId, callback) {
+  console.log(imagePath);
   fs.access(imagePath, fs.F_OK, function(err) {
     if (err) {
       callback(err);
