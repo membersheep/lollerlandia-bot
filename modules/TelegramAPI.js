@@ -1,15 +1,11 @@
+var config = require('../config');
 var request = require('request');
 var fs = require('fs');
-
-// https://api.telegram.org/bot<token>/METHOD_NAME
-var TELEGRAM_BASE_URL = "https://api.telegram.org/bot";
-var SETUP_WEBHOOK = "/setWebhook?url=:url";
-var POST_IMAGE = "/sendPhoto";
 
 var telegramAPI = {};
 
 telegramAPI.setupWebhook = function(token, url, callback){
-  var requestUrl = TELEGRAM_BASE_URL + token + SETUP_WEBHOOK.replace(":url", url);
+  var requestUrl = config.TELEGRAM_BASE_URL + token + config.TELEGRAM_SETUP_WEBHOOK.replace(":url", url);
   request(requestUrl, {}, function (err, res, body) {
     if (err) {
       return callback(err);
@@ -26,7 +22,7 @@ telegramAPI.postImage = function(token, imagePath, chatId, callback) {
     if (err) {
       callback(err);
     } else {
-      var requestUrl = TELEGRAM_BASE_URL + token + POST_IMAGE;
+      var requestUrl = config.TELEGRAM_BASE_URL + token + config.TELEGRAM_POST_IMAGE;
       var formData = {
         chat_id: chatId,
         photo: fs.createReadStream(imagePath)
