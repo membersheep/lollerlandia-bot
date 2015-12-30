@@ -6,14 +6,12 @@ chanService.getRandomImage = function(board, callback) {
   chanAPI.downloadJSONForBoard(board, function(err, body){
     if (err) {
       return callback(err);
-    } else if (res.statusCode == 200) {
-      var randomImageName = extractRandomImageNames(body);
-      chanAPI.downloadMedia(randomImageName, __dirname, function(path){
+    } else {
+      var randomImageName = extractRandomImageName(body);
+      chanAPI.downloadMedia(randomImageName, board, __dirname + "../images", function(err, path){
   			console.log(randomImageName + 'downloaded at' + path);
   			return callback(null, path);
   		});
-    } else {
-      return callback(new Error('Unable to get image'));
     }
 	});
 };
