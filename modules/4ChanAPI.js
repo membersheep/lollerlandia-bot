@@ -28,7 +28,7 @@ chanInterface.downloadJSONForBoard = function(board, callback) {
 chanInterface.downloadMedia = function(name, board, localPath, callback) {
   var requestUrl = CHAN_IMAGE_BASE_URL + board + "/" + name;
   var targetPath = localPath + "/" + name;
-	ensureExists(targetPath, 0744, function(err){
+	ensureExists(localPath, 0744, function(err){
 		if(err) {
 			return callback(err);
 		} else {

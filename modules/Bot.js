@@ -13,7 +13,7 @@ var bot = {
               if (err) {
                 return console.log(err);
               } else {
-                return console.log(body);
+                return console.log('image posted!');
               }
             });
           }
