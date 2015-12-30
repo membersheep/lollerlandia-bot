@@ -28,16 +28,39 @@ chanInterface.downloadJSONForBoard = function(board, callback) {
 chanInterface.downloadMedia = function(name, board, localPath, callback) {
   var requestUrl = CHAN_IMAGE_BASE_URL + board + "/" + name;
   var targetPath = localPath + "/" + name;
-
-  request.head(requestUrl, function(err, res, body){
-    if(err) {
-      return callback(err);
-    } else {
-      var r = request(requestUrl).pipe(fs.createWriteStream(targetPath)).on('close', function(){
-				callback(null, targetPath);
-			});
-    }
-  });
+	ensureExists(targetPath, 0744, function(err){
+		if(err) {
+			return callback(err);
+		} else {
+			request.head(requestUrl, function(err, res, body){
+		    if(err) {
+		      return callback(err);
+		    } else {
+		      var r = request(requestUrl).pipe(fs.createWriteStream(targetPath)).on('close', function(){
+						callback(null, targetPath);
+					});
+		    }
+		  });
+		}
+	});
 };
+
+function ensureExists(path, mask, cb) {
+    if (typeof mask == 'function') {
+        cb = mask;
+        mask = 0777;
+    }
+    fs.mkdir(path, mask, function(err) {
+        if (err) {
+					if (err.code == 'EEXIST') {
+						cb(null);
+					} else {
+						cb(err);
+					}
+        } else {
+					cb(null);
+				}
+    });
+}
 
 module.exports = chanInterface;

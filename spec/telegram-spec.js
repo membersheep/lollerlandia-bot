@@ -7,11 +7,14 @@ var telegramRequest = {
     message:'pippo'
   }
 };
+var telegramResponse = {
+  send: function(){}
+};
 var telegramHandler = proxyquire('../routes/telegram', { '../modules/Bot.js': botStub });
 
 describe('Route: /telegram', function(){
   it('Extract every message from body and reads it with Bot', function(){
-    telegramHandler(telegramRequest, {});
+    telegramHandler(telegramRequest, telegramResponse);
     expect(botStub.messages()).toEqual('pippo');
   });
 });

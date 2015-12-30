@@ -8,7 +8,6 @@ chanService.getRandomImage = function(board, callback) {
       return callback(err);
     } else {
       var randomImageName = extractRandomImageName(body);
-      console.log(randomImageName);
       chanAPI.downloadMedia(randomImageName, board, __dirname + "/../images", function(err, path){
   			return callback(null, path);
   		});

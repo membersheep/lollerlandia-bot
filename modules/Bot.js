@@ -5,7 +5,11 @@ var bot = {
     readMessage: function(message) {
       if (message.text == '/b') {
         chanService.getRandomImage(message.text, function(err, localPath){
-          telegramService.postImage(localPath, message.chat.id);
+          if (err) {
+            return console.log(err);
+          } else {
+            telegramService.postImage(localPath, message.chat.id);
+          }
         });
       }
     }
