@@ -1,5 +1,4 @@
 #LollerlandiaBot
-- 4chan service tests.
 - Deploy on heroku and test with telegram.
 - Refactoring:
   - Move all configuration strings to a config.js file.
