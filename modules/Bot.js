@@ -33,13 +33,24 @@ bot.executeBoardCommand = function (message) {
     if (err) {
       return console.log(err);
     } else {
-      telegramService.postImage(config.TOKEN, localPath, message.chat.id, function(err, res, body) {
-        if (err) {
-          return console.log(err);
-        } else {
-          return console.log('image posted!');
-        }
-      });
+      var extension = localPath.split('.').pop();
+      if (extension == 'png' || extension == 'jpg') {
+        telegramService.postImage(config.TOKEN, localPath, message.chat.id, function(err, res, body) {
+          if (err) {
+            return console.log(err);
+          } else {
+            return console.log('image posted!');
+          }
+        });
+      } else {
+        telegramService.postDocument(config.TOKEN, localPath, message.chat.id, function(err, res, body) {
+          if (err) {
+            return console.log(err);
+          } else {
+            return console.log('document posted!');
+          }
+        });
+      }
     }
   });
 };

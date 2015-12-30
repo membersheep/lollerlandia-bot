@@ -40,4 +40,27 @@ telegramAPI.postImage = function(token, imagePath, chatId, callback) {
   });
 };
 
+telegramAPI.postDocument = function(token, documentPath, chatId, callback) {
+  fs.access(documentPath, fs.F_OK, function(err) {
+    if (err) {
+      callback(err);
+    } else {
+      var requestUrl = config.TELEGRAM_BASE_URL + token + config.TELEGRAM_POST_DOCUMENT;
+      var formData = {
+        chat_id: chatId,
+        document: fs.createReadStream(documentPath)
+      };
+      request.post({url:requestUrl, formData: formData}, function(err, res, body) {
+        if (err) {
+          return callback(err);
+        } else if (res.statusCode == 200) {
+          return callback(null, res, body);
+        } else {
+          return callback(new Error("Unable to post document. Code " + res.statusCode));
+        }
+      });
+    }
+  });
+};
+
 module.exports = telegramAPI;
