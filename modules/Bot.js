@@ -76,8 +76,9 @@ bot.isMessageNew = function(message) {
   var currentDate = Date.now();
   var ONE_MINUTE = 60 * 60 * 1000;
   console.log(currentDate/1000);
-  console.log(message.date);
-  return (currentDate - message.date) < ONE_MINUTE;
+  console.log(currentDate/1000 - message.date);
+  console.log(ONE_MINUTE);
+  return (currentDate/1000 - message.date) < ONE_MINUTE;
 };
-console.log(Date.now());
+
 module.exports = bot;
