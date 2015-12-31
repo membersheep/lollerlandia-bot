@@ -5,6 +5,7 @@ var telegramService = require('./TelegramAPI');
 var bot = {};
 
 bot.readMessage = function(message) {
+  message.text = bot.normalizeMessage(message);
   console.log('reading message...');
   if (bot.isMessageNew(message)) {
     console.log('message is new');
@@ -63,6 +64,13 @@ bot.isMessageCommand = function(message) {
     return false;
   }
   return config.COMMANDS.indexOf(message.text) >= 0;
+};
+
+bot.normalizeMessage = function(message) {
+  if (!message.hasOwnProperty('text')) {
+    return false;
+  }
+  return message.text.replace("@" + config.BOT_NAME, "");
 };
 
 bot.isMessageNew = function(message) {
