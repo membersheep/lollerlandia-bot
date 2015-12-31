@@ -1,6 +1,5 @@
 #LollerlandiaBot
 - Features:
-  - Expose commands (remove bot name from the end of the command string before matching it).
   - Differentiate GIF and webm.
   - Add giphy source.
   - Filter reposts.
