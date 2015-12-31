@@ -2,8 +2,6 @@ var config = require('../config');
 var request = require('request');
 var fs = require('fs');
 
-var CHAN_BASE_URL = "http://a.4cdn.org/";
-var CHAN_IMAGE_BASE_URL = "http://i.4cdn.org/";
 var requestOptions = {
 	json: true,
 	headers: {
@@ -14,7 +12,8 @@ var requestOptions = {
 var chanInterface = {};
 
 chanInterface.downloadJSONForBoard = function(board, callback) {
-  var requestUrl = config.CHAN_BASE_URL + board + "/1.json";
+	var randomPageNumber = Math.floor(Math.random() * 10) + 1;
+  var requestUrl = config.CHAN_BASE_URL + board + "/" + randomPageNumber + ".json";
   request(requestUrl, requestOptions, function (err, res, body) {
     if (err) {
       return callback(err);

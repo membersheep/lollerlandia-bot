@@ -11,12 +11,11 @@ bot.readMessage = function(message) {
     if (bot.isMessageCommand(message)) {
       console.log('message is command');
       bot.executeCommand(message);
+    } else {
+      console.log('message is not a command.');
     }
   } else {
     console.log('message is old, drop it.');
-  }
-  if (message.text == '/b') {
-
   }
 };
 
