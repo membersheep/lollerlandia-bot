@@ -15,4 +15,15 @@ describe('4Chan Service', function(){
       });
     });
   });
+  describe('getRandomMediaURLFromBoard', function() {
+    describe('given a board name', function() {
+      it('requests a json for that board', function(done){
+        chanService.getRandomMediaURLFromBoard('b', function(err, path){
+          expect(err).toBe(null);
+          expect(path).not.toBe(null);
+          done();
+        });
+      });
+    });
+  });
 });

@@ -22,6 +22,21 @@ chanService.getRandomImage = function(board, callback) {
 	});
 };
 
+chanService.getRandomMediaURLFromBoard = function(boardName, callback) {
+  var board = '/' + boardName;
+  chanAPI.downloadJSONForBoard(board, function(err, body){
+    if (err) {
+      return callback(err);
+    } else {
+      var randomFileName = extractRandomFileName(body);
+      if (randomFileName === undefined) {
+        return callback(new Error("Impossible to extract a file name from JSON."));
+      }
+      return callback(null, randomFileName);
+    }
+	});
+};
+
 function extractRandomFileName(body) {
   if (!body.hasOwnProperty('threads')) {
     return undefined;
