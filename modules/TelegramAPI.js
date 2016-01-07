@@ -65,7 +65,7 @@ telegramAPI.postDocument = function(token, documentPath, chatId, callback) {
 
 telegramAPI.answerQueryWithMedia = function(token, queryId, mediaURLs, callback) {
   var requestUrl = config.TELEGRAM_BASE_URL + token + config.TELEGRAM_ANSWER_QUERY;
-  var results = mediaURLs.map(function(url){
+  var results = mediaURLs.map(function(url) {
     var fileExtension = url.split('.').pop();
     var fileName = url.split('/').pop().split('.').pop();
     var thumbnailUrl = url.replace('.' + fileExtension, 's.jpg');
@@ -73,34 +73,34 @@ telegramAPI.answerQueryWithMedia = function(token, queryId, mediaURLs, callback)
     switch (fileExtension) {
       case 'png':
         result.type = 'photo';
-        result.id = filename;
+        result.id = fileName;
         result.photo_url = thumbnailUrl;
         result.thumb_url = thumbnailUrl;
         break;
       case 'jpg':
         result.type = 'photo';
-        result.id = filename;
+        result.id = fileName;
         result.photo_url = url;
         result.thumb_url = thumbnailUrl;
         break;
       case 'gif':
         result.type = 'gif';
-        result.id = filename;
+        result.id = fileName;
         result.gif_url = url;
         result.thumb_url = thumbnailUrl;
         break;
       case 'webm':
         result.type = 'video';
-        result.id = filename;
+        result.id = fileName;
         result.video_url = url;
         result.thumb_url = thumbnailUrl;
         result.mime_type = 'video/mp4';
         result.message_text = '';
-        result.title = filename;
+        result.title = fileName;
         break;
       default:
         result.type = 'photo';
-        result.id = filename;
+        result.id = fileName;
         result.photo_url = thumbnailUrl;
         result.thumb_url = thumbnailUrl;
     }
