@@ -4,24 +4,19 @@ var telegramService = require('./TelegramAPI');
 
 var bot = {};
 
+// MESSAGES
+
 bot.readMessage = function(message) {
   message.text = bot.normalizeMessage(message);
-  console.log('reading message...');
   if (bot.isMessageNew(message)) {
-    console.log('message is new');
     if (bot.isMessageCommand(message)) {
-      console.log('message is command');
       bot.executeCommand(message);
     } else {
-      console.log('message is not a command.');
+      console.log('message ' + message.text + ' is not a command.');
     }
   } else {
-    console.log('message is old, drop it.');
+    console.log('message ' + message.text + ' is old, dropped.');
   }
-};
-
-bot.readQuery = function(query) {
-  console.log(query);
 };
 
 bot.executeCommand = function(message) {
@@ -87,6 +82,40 @@ bot.isMessageNew = function(message) {
   var currentDate = Date.now();
   var ONE_MINUTE = 60 * 60 * 1000;
   return (currentDate/1000 - message.date) < ONE_MINUTE;
+};
+
+// INLINE QUERIES
+
+bot.readQuery = function(inline_query) {
+  console.log('reading query...');
+  if (bot.isQueryValid(inline_query)) {
+    bot.executeQuery(inline_query);
+  } else {
+    console.log('query ' + inline_query.query + ' is invalid.');
+  }
+};
+
+bot.isQueryValid = function(inline_query) {
+  if (!inline_query.hasOwnProperty('query')) {
+    return false;
+  }
+  return config.VALID_QUERIES.indexOf(inline_query.query) >= 0;
+};
+
+bot.executeQuery = function (inline_query) {
+  chanService.getRandomMediaURLFromBoard(inline_query.query, function(err, mediaURL) {
+    if (err) {
+      return console.log(err);
+    } else {
+      telegramService.answerQueryWithMedia(config.TOKEN, inline_query.id, mediaURL, function(err, res, body) {
+        if (err) {
+          return console.log(err);
+        } else {
+          return console.log('query ' + inline_query.id + ' answered.');
+        }
+      });
+    }
+  });
 };
 
 module.exports = bot;

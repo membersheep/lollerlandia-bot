@@ -19,5 +19,6 @@ config.CHAN_SAFE_COMMANDS = ["/i", "/ic", "/r9k", "/s4s", "/cm", "/hm", "/lgbt",
 config.CHAN_UNSAFE_COMMANDS = ["/a", "/b", "/c", "/d", "/e", "/f", "/g", "/gif", "/h", "/hr", "/k", "/m", "/o", "/p", "/r", "/s", "/t", "/u", "/v", "/vg", "/vr", "/w", "/wg"];
 config.COMMANDS = config.GENERIC_COMMANDS.concat(config.CHAN_SAFE_COMMANDS).concat(config.CHAN_UNSAFE_COMMANDS);
 config.BOARD_COMMANDS = config.CHAN_SAFE_COMMANDS.concat(config.CHAN_UNSAFE_COMMANDS);
+config.VALID_QUERIES = config.BOARD_COMMANDS.map(function(cmd) {return cmd.replace("/","");});
 
 module.exports = config;

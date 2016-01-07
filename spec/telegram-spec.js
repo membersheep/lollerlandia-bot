@@ -25,18 +25,19 @@ var telegramResponse = {
 var telegramHandler = proxyquire('../routes/telegram', { '../modules/Bot.js': botStub });
 
 describe('Route: /telegram', function(){
-  it('Reads a message from a message request', function(){
+  beforeEach(function() {
     botStub.reset();
+  });
+
+  it('Reads a message from a message request', function(){
     telegramHandler(telegramMessageRequest, telegramResponse);
     expect(botStub.message).toEqual(telegramMessageRequest.body.message);
   });
   it('Reads a query from a query request', function(){
-    botStub.reset();
     telegramHandler(telegramQueryRequest, telegramResponse);
     expect(botStub.query).toEqual(telegramQueryRequest.body.inline_query);
   });
   it('Doesnt read a malformed request', function(){
-    botStub.reset();
     telegramHandler(malformedRequest, telegramResponse);
     expect(botStub.message).toEqual('');
     expect(botStub.query).toEqual('');
