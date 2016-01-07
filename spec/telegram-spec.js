@@ -1,10 +1,22 @@
 var proxyquire = require('proxyquire');
 
 var botStub = require('./stubs/bot-stub');
-var telegramRequest = {
+var telegramMessageRequest = {
   body: {
     update_id:31836785,
-    message:'pippo'
+    message:'message'
+  }
+};
+var telegramQueryRequest = {
+  body: {
+    update_id:31836785,
+    inline_query:'query'
+  }
+};
+var malformedRequest = {
+  bode: {
+    update_id:31836785,
+    inline_query:'malformed'
   }
 };
 var telegramResponse = {
@@ -13,8 +25,20 @@ var telegramResponse = {
 var telegramHandler = proxyquire('../routes/telegram', { '../modules/Bot.js': botStub });
 
 describe('Route: /telegram', function(){
-  it('Extract every message from body and reads it with Bot', function(){
-    telegramHandler(telegramRequest, telegramResponse);
-    expect(botStub.messages()).toEqual('pippo');
+  it('Reads a message from a message request', function(){
+    botStub.reset();
+    telegramHandler(telegramMessageRequest, telegramResponse);
+    expect(botStub.message).toEqual(telegramMessageRequest.body.message);
+  });
+  it('Reads a query from a query request', function(){
+    botStub.reset();
+    telegramHandler(telegramQueryRequest, telegramResponse);
+    expect(botStub.query).toEqual(telegramQueryRequest.body.inline_query);
+  });
+  it('Doesnt read a malformed request', function(){
+    botStub.reset();
+    telegramHandler(malformedRequest, telegramResponse);
+    expect(botStub.message).toEqual('');
+    expect(botStub.query).toEqual('');
   });
 });

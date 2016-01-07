@@ -1,8 +1,16 @@
-var message = '';
+var botStub = {};
 
-exports.readMessage =  function(msg) {
-  message = msg;
+botStub.readMessage =  function(msg) {
+  botStub.message = msg;
 };
-exports.messages = function() {
-  return message;
+
+botStub.readQuery =  function(qry) {
+  botStub.query = qry;
 };
+
+botStub.reset =  function() {
+  botStub.query = '';
+  botStub.message = '';
+};
+
+module.exports = botStub;

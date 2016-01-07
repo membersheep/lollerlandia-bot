@@ -63,4 +63,8 @@ telegramAPI.postDocument = function(token, documentPath, chatId, callback) {
   });
 };
 
+telegramAPI.answerInlineQueryWithImage = function(token, imagePath, queryId){
+  // TODO: Implement this method.
+};
+
 module.exports = telegramAPI;

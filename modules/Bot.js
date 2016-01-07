@@ -20,6 +20,10 @@ bot.readMessage = function(message) {
   }
 };
 
+bot.readQuery = function(query) {
+  console.log(query);
+};
+
 bot.executeCommand = function(message) {
   if(config.BOARD_COMMANDS.indexOf(message.text) >= 0) {
     bot.executeBoardCommand(message);
