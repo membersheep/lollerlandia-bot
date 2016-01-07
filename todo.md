@@ -1,8 +1,8 @@
 #LollerlandiaBot
 - Features:
-  - Inline bot support
-  - Create public 4bot
-  - Try answering with message before posting image ("hold on..."),
+  - Inline bot support.
+  - Create public 4bot.
+  - Send Chat action message while loading.
   - Answer with message if can't load image or can't post it.
   - Add /start and /help commands (required).
   - Add a logger in place of console.logs.

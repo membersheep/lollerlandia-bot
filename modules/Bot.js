@@ -103,11 +103,11 @@ bot.isQueryValid = function(inline_query) {
 };
 
 bot.executeQuery = function (inline_query) {
-  chanService.getRandomMediaURLFromBoard(inline_query.query, function(err, mediaURL) {
+  chanService.getRandomMediaURLsFromBoard(inline_query.query, config.QUERY_RESULT_COUNT, function(err, mediaURLs) {
     if (err) {
       return console.log(err);
     } else {
-      telegramService.answerQueryWithMedia(config.TOKEN, inline_query.id, mediaURL, function(err, res, body) {
+      telegramService.answerQueryWithMedia(config.TOKEN, inline_query.id, mediaURLs, function(err, res, body) {
         if (err) {
           return console.log(err);
         } else {

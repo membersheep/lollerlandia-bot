@@ -1,4 +1,5 @@
 var chanAPI = require('./4ChanAPI');
+var config = require('../config');
 
 var chanService = {};
 
@@ -22,20 +23,35 @@ chanService.getRandomImage = function(board, callback) {
 	});
 };
 
-chanService.getRandomMediaURLFromBoard = function(boardName, callback) {
+chanService.getRandomMediaURLsFromBoard = function(boardName, count, callback) {
   var board = '/' + boardName;
   chanAPI.downloadJSONForBoard(board, function(err, body){
     if (err) {
       return callback(err);
     } else {
-      var randomFileName = extractRandomFileName(body);
-      if (randomFileName === undefined) {
+      var randomFileNames = extractRandomFileNames(body, count);
+      if (randomFileNames === undefined) {
         return callback(new Error("Impossible to extract a file name from JSON."));
       }
-      return callback(null, randomFileName);
+      var randomURLs = randomFileNames.map(function(filename){
+        return config.CHAN_IMAGE_BASE_URL + filename;
+      });
+      return callback(null, randomURLs);
     }
 	});
 };
+
+function extractRandomFileNames(body, count) {
+  var filenames = [];
+  for (var i = 0; i < count; i++) {
+    var filename = extractRandomFileName(body);
+    if (filename === undefined) {
+      return undefined;
+    }
+    filenames.push(filename);
+  }
+  return filenames;
+}
 
 function extractRandomFileName(body) {
   if (!body.hasOwnProperty('threads')) {

@@ -15,10 +15,10 @@ describe('4Chan Service', function(){
       });
     });
   });
-  describe('getRandomMediaURLFromBoard', function() {
+  describe('getRandomMediaURLsFromBoard', function() {
     describe('given a board name', function() {
       it('requests a json for that board', function(done){
-        chanService.getRandomMediaURLFromBoard('b', function(err, path){
+        chanService.getRandomMediaURLsFromBoard('b', 1, function(err, path){
           expect(err).toBe(null);
           expect(path).not.toBe(null);
           done();

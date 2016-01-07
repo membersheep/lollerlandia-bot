@@ -63,8 +63,58 @@ telegramAPI.postDocument = function(token, documentPath, chatId, callback) {
   });
 };
 
-telegramAPI.answerInlineQueryWithImage = function(token, imagePath, queryId){
-  // TODO: Implement this method.
+telegramAPI.answerQueryWithMedia = function(token, queryId, mediaURLs, callback) {
+  var requestUrl = config.TELEGRAM_BASE_URL + token + config.TELEGRAM_ANSWER_QUERY;
+  var results = mediaURLs.map(function(url){
+    var fileExtension = url.split('.').pop();
+    var fileName = url.split('/').pop().split('.').pop();
+    var thumbnailUrl = url.replace('.' + fileExtension, 's.jpg');
+    var result = {};
+    switch (fileExtension) {
+      case 'png':
+        result.type = 'photo';
+        result.id = filename;
+        result.photo_url = thumbnailUrl;
+        result.thumb_url = thumbnailUrl;
+        break;
+      case 'jpg':
+        result.type = 'photo';
+        result.id = filename;
+        result.photo_url = url;
+        result.thumb_url = thumbnailUrl;
+        break;
+      case 'gif':
+        result.type = 'gif';
+        result.id = filename;
+        result.gif_url = url;
+        result.thumb_url = thumbnailUrl;
+        break;
+      case 'webm':
+        result.type = 'video';
+        result.id = filename;
+        result.video_url = url;
+        result.thumb_url = thumbnailUrl;
+        result.mime_type = 'video/mp4';
+        result.message_text = '';
+        result.title = filename;
+        break;
+      default:
+        result.type = 'photo';
+        result.id = filename;
+        result.photo_url = thumbnailUrl;
+        result.thumb_url = thumbnailUrl;
+    }
+    return result;
+  });
+  request.post({inline_query_id:queryId, results: results}, function(err, res, body) {
+    if (err) {
+      return callback(err);
+    } else if (res.statusCode == 200) {
+      return callback(null, res, body);
+    } else {
+      return callback(new Error("ERROR: Unable to answer query. Code " + res.statusCode));
+    }
+  });
 };
 
 module.exports = telegramAPI;
