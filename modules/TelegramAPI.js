@@ -113,9 +113,7 @@ telegramAPI.answerQueryWithMedia = function(token, queryId, mediaURLs, callback)
     } else if (res.statusCode == 200) {
       return callback(null, res, body);
     } else {
-      console.log(queryId);
-      console.log(body);
-      return callback(new Error("ERROR: Unable to answer query. Code " + res.statusCode));
+      return callback(new Error(body.error_code));
     }
   });
 };
