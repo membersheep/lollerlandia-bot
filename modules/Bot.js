@@ -111,6 +111,7 @@ bot.executeQuery = function (inline_query) {
         if (err) {
           return console.log(err);
         } else {
+          console.log(body);
           return console.log('query ' + inline_query.id + ' answered.');
         }
       });
