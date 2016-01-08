@@ -75,6 +75,7 @@ telegramAPI.answerQueryWithMedia = function(token, queryId, mediaURLs, callback)
     result.title = fileName;
     result.message_text = fileName;
     result.url = url;
+    result.thumb_url = thumbnailUrl;
     return result;
   });
   console.log(results);
