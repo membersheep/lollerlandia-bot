@@ -1,6 +1,7 @@
 #LollerlandiaBot
 - Features:
   - Inline bot support.
+  - Refactoring.
   - Create public 4bot.
   - Send Chat action message while loading.
   - Answer with message if can't load image or can't post it.

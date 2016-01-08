@@ -106,12 +106,13 @@ telegramAPI.answerQueryWithMedia = function(token, queryId, mediaURLs, callback)
     }
     return result;
   });
-  request.post(requestUrl, {inline_query_id:queryId, results: results}, function(err, res, body) {
+  request.post(requestUrl, {inline_query_id:queryId, results: JSON.stringify(results)}, function(err, res, body) {
     if (err) {
       return callback(err);
     } else if (res.statusCode == 200) {
       return callback(null, res, body);
     } else {
+      console.log(body);
       return callback(new Error("ERROR: Unable to answer query. Code " + res.statusCode));
     }
   });
