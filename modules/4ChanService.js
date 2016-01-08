@@ -34,7 +34,7 @@ chanService.getRandomMediaURLsFromBoard = function(boardName, count, callback) {
         return callback(new Error("Impossible to extract a file name from JSON."));
       }
       var randomURLs = randomFileNames.map(function(filename){
-        return config.CHAN_IMAGE_BASE_URL + boardname + '/' + filename;
+        return config.CHAN_IMAGE_BASE_URL + boardName + '/' + filename;
       });
       return callback(null, randomURLs);
     }
