@@ -70,10 +70,11 @@ telegramAPI.answerQueryWithMedia = function(token, queryId, mediaURLs, callback)
     var fileName = url.split('/').pop().split('.')[0];
     var thumbnailUrl = url.replace('.' + fileExtension, 's.jpg');
     var result = {};
+    // For now we send everything as article due to telegram limitations.
     result.type = 'article';
     result.id = fileName;
     result.title = fileName;
-    result.message_text = fileName;
+    result.message_text = url;
     result.url = url;
     result.thumb_url = thumbnailUrl;
     return result;
