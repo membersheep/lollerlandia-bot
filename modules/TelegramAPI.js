@@ -106,7 +106,7 @@ telegramAPI.answerQueryWithMedia = function(token, queryId, mediaURLs, callback)
     }
     return result;
   });
-
+  console.log(results);
   request.post(requestUrl, {form:{inline_query_id:queryId, results: JSON.stringify(results)}}, function(err, res, body) {
     if (err) {
       return callback(err);
