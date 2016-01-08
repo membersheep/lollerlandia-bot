@@ -67,7 +67,7 @@ telegramAPI.answerQueryWithMedia = function(token, queryId, mediaURLs, callback)
   var requestUrl = config.TELEGRAM_BASE_URL + token + config.TELEGRAM_ANSWER_QUERY;
   var results = mediaURLs.map(function(url) {
     var fileExtension = url.split('.').pop();
-    var fileName = url.split('/').pop().split('.').pop();
+    var fileName = url.split('/').pop().split('.').pop().pop();
     var thumbnailUrl = url.replace('.' + fileExtension, 's.jpg');
     var result = {};
     switch (fileExtension) {
