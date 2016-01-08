@@ -70,40 +70,11 @@ telegramAPI.answerQueryWithMedia = function(token, queryId, mediaURLs, callback)
     var fileName = url.split('/').pop().split('.')[0];
     var thumbnailUrl = url.replace('.' + fileExtension, 's.jpg');
     var result = {};
-    switch (fileExtension) {
-      case 'png':
-        result.type = 'photo';
-        result.id = fileName;
-        result.photo_url = thumbnailUrl;
-        result.thumb_url = thumbnailUrl;
-        break;
-      case 'jpg':
-        result.type = 'photo';
-        result.id = fileName;
-        result.photo_url = url;
-        result.thumb_url = thumbnailUrl;
-        break;
-      case 'gif':
-        result.type = 'gif';
-        result.id = fileName;
-        result.gif_url = url;
-        result.thumb_url = thumbnailUrl;
-        break;
-      case 'webm':
-        result.type = 'video';
-        result.id = fileName;
-        result.video_url = url;
-        result.thumb_url = thumbnailUrl;
-        result.mime_type = 'video/mp4';
-        result.message_text = '';
-        result.title = fileName;
-        break;
-      default:
-        result.type = 'photo';
-        result.id = fileName;
-        result.photo_url = thumbnailUrl;
-        result.thumb_url = thumbnailUrl;
-    }
+    result.type = 'article';
+    result.id = fileName;
+    result.title = fileName;
+    result.message_text = fileName;
+    result.url = url;
     return result;
   });
   console.log(results);
