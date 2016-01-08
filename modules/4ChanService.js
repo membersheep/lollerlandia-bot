@@ -48,7 +48,9 @@ function extractRandomFileNames(body, count) {
     if (filename === undefined) {
       return undefined;
     }
-    filenames.push(filename);
+    if (filenames.indexOf(filename) < 0) {
+      filenames.push(filename);  
+    }
   }
   return filenames;
 }
