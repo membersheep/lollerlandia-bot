@@ -73,7 +73,6 @@ telegramAPI.answerQueryWithMedia = function(token, queryId, mediaURLs, callback)
     result.type = 'article';
     result.id = fileName;
     result.title = fileName;
-    result.message_text = fileName;
     result.url = url;
     result.thumb_url = thumbnailUrl;
     return result;
