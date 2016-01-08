@@ -74,7 +74,7 @@ telegramAPI.answerQueryWithMedia = function(token, queryId, mediaURLs, callback)
     result.type = 'article';
     result.id = fileName;
     result.title = fileName;
-    result.message_text = url;
+    result.message_text = 'Touch to send';
     result.url = url;
     result.thumb_url = thumbnailUrl;
     return result;
