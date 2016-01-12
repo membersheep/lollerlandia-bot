@@ -1,2 +1,3 @@
 # lollerlandia-bot
-telegram bot to do some funny stuff
+The 4chan bot has been moved to https://github.com/membersheep/4bot .
+This bot will be used for testing and experiments.
