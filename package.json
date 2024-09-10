@@ -18,7 +18,7 @@
   },
   "homepage": "https://github.com/membersheep/lollerlandia-bot#readme",
   "dependencies": {
-    "body-parser": "1.14.2",
+    "body-parser": "1.20.3",
     "express": "^4.13.3",
     "proxyquire": "^1.7.3",
     "request": "2.88.0"
